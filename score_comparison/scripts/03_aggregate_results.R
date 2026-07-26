@@ -1,0 +1,17 @@
+script_argument <- grep("^--file=", commandArgs(trailingOnly = FALSE), value = TRUE)
+if (!length(script_argument)) stop("This script must be run with Rscript.")
+script_path <- normalizePath(sub("^--file=", "", script_argument[[1L]]), mustWork = TRUE)
+module_root <- normalizePath(file.path(dirname(script_path), ".."), mustWork = TRUE)
+
+source(file.path(module_root, "R", "utilities.R"))
+source(file.path(module_root, "R", "set_geometry.R"))
+source(file.path(module_root, "R", "set_length.R"))
+source(file.path(module_root, "R", "metrics.R"))
+source(file.path(module_root, "R", "simulation.R"))
+source(file.path(module_root, "R", "aggregation.R"))
+
+arguments <- parse_comparison_arguments()
+config <- load_comparison_config(module_root, arguments$config)
+input_dir <- resolve_from_root(module_root, arguments$output_dir, must_work = TRUE)
+aggregate_comparison_results(config, input_dir, input_dir)
+message("Aggregation and validation completed: ", arguments$output_dir)
