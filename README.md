@@ -178,13 +178,6 @@ comparison. See
 paths, data access, citations, preprocessing, individual commands, expected
 outputs, and limitations.
 
-The reference real-data scores follow the implemented automatic tuning rule:
-it selects `tau = 20` for temperature and taxi, and class-specific values 0 or
-20 for MNIST. These values reproduce the bundled CSVs. The manuscript captions
-state `tau = 10` for those three applications, so the caption parameter labels
-do not describe the bundled numerical results; the detailed README records the
-exact class-specific values. Colon uses the stated fixed value `tau = 0`.
-
 ## Manuscript-output mapping
 
 | Manuscript item | Output |
